@@ -11,7 +11,8 @@ app.use(express.urlencoded({ extended: true }));
 
 // Railway Free/Trial/Hobby plans block SMTP, so email goes out over Brevo's HTTPS API.
 const BREVO_URL = 'https://api.brevo.com/v3/smtp/email';
-const OWNER_EMAIL = process.env.email; // verified sender in Brevo, also receives the messages
+const SENDER_EMAIL = process.env.email; // sender address verified in Brevo
+const RECEIVER_EMAIL = process.env.RECEIVER_EMAIL || 'pratham.shetty@gmail.com'; // inbox that receives form messages
 
 const escapeHtml = (str) =>
   String(str).replace(/[&<>"']/g, (c) => ({
@@ -31,7 +32,7 @@ async function sendMail({ to, subject, html, replyTo }) {
       accept: 'application/json',
     },
     body: JSON.stringify({
-      sender: { name: 'Pratham Shetty Portfolio', email: OWNER_EMAIL },
+      sender: { name: 'Pratham Shetty Portfolio', email: SENDER_EMAIL },
       to: [{ email: to }],
       subject,
       htmlContent: html,
@@ -117,7 +118,7 @@ app.post('/send', async (req, res) => {
 
     await Promise.all([
       sendMail({
-        to: OWNER_EMAIL,
+        to: RECEIVER_EMAIL,
         subject: `New Contact Form Submission from ${name}`,
         html: ownerHtml,
         replyTo: email,
