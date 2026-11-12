@@ -143,7 +143,11 @@ app.post('/send', async (req, res) => {
   }
 });
 
-// Railway's proxy needs the server bound to 0.0.0.0 on the injected PORT
-app.listen(port, '0.0.0.0', () => {
-  console.log(`Server running on 0.0.0.0:${port}`);
-});
+// Vercel runs the exported app as a serverless function, so only listen locally.
+if (!process.env.VERCEL) {
+  app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+  });
+}
+
+module.exports = app;
