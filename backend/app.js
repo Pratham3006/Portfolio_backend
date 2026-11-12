@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 // Railway Free/Trial/Hobby plans block SMTP, so email goes out over Brevo's HTTPS API.
 const BREVO_URL = 'https://api.brevo.com/v3/smtp/email';
 const SENDER_EMAIL = process.env.email; // sender address verified in Brevo
-const RECEIVER_EMAIL = process.env.RECEIVER_EMAIL || 'pratham.shetty@gmail.com'; // inbox that receives form messages
+const RECEIVER_EMAIL = process.env.RECEIVER_EMAIL || 'prathamshetty71@gmail.com'; // inbox that receives form messages
 
 const escapeHtml = (str) =>
   String(str).replace(/[&<>"']/g, (c) => ({
