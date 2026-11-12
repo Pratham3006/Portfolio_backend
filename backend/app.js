@@ -32,7 +32,7 @@ async function sendMail({ to, subject, html, replyTo }) {
       accept: 'application/json',
     },
     body: JSON.stringify({
-      sender: { name: 'Pratham Shetty Portfolio', email: SENDER_EMAIL },
+      sender: { name: 'Pratham Shetty', email: SENDER_EMAIL },
       to: [{ email: to }],
       subject,
       htmlContent: html,
