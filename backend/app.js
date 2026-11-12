@@ -143,6 +143,7 @@ app.post('/send', async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+// Railway's proxy needs the server bound to 0.0.0.0 on the injected PORT
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Server running on 0.0.0.0:${port}`);
 });
