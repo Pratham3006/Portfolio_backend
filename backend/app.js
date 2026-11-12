@@ -56,14 +56,14 @@ app.post('/send', async (req, res) => {
 
     if (!name || !email || !message) {
       return res.status(400).json({
-        sucess: false,
+        success: false,
         message: 'All fields are required',
       });
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      return res.status(401).json({
-        sucess: false,
+      return res.status(400).json({
+        success: false,
         message: 'Invalid email format',
       });
     }
@@ -131,7 +131,7 @@ app.post('/send', async (req, res) => {
     ]);
 
     res.status(200).json({
-      sucess: true,
+      success: true,
       message: 'Message sent successfully!',
     });
   } catch (error) {
